@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Análise de Logs</h2>
+
+{% if no_data %}
+<p>Não há registros de acesso no momento.</p>
+{% else %}
+
+<!-- Formulário para filtrar colaborador específico -->
+<form method="GET" action="{{ url_for('analysis') }}">
+  <label>Filtrar horas de um colaborador (digite user_id):</label>
+  <input type="number" name="user_id">
+  <button type="submit">Buscar</button>
+</form>
+<hr>
+
+<h3>Entradas e Saídas por Dia (Todos Usuários)</h3>
+<table>
+  <tr>
+    <th>Data</th>
+    <th>Evento</th>
+    <th>Contagem</th>
+  </tr>
+  {% for row in daily_list %}
+  <tr>
+    <td>{{ row.date }}</td>
+    <td>{{ row.event_type }}</td>
+    <td>{{ row.count }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<hr>
+<h3>Horas Totais por Usuário (apenas logs permitidos com entry + exit)</h3>
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>Horas Totais</th>
+  </tr>
+  {% for row in hours_list %}
+  <tr>
+    <td>{{ row.user_id }}</td>
+    <td>{{ row.total_hours|round(2) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if user_hours %}
+<hr>
+<h3>Colaborador Específico</h3>
+<ul>
+{% for uh in user_hours %}
+  <li>User ID: {{ uh.user_id }} => Total de Horas: {{ uh.total_hours|round(2) }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endif %}
+{% endblock %}

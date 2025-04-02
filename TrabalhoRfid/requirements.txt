@@ -1,0 +1,6 @@
+flask
+pubnub
+requests
+pandas
+mfrc522
+werkzeug

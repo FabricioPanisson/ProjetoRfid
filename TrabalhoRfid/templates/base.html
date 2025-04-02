@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title if title else "Sistema de Acesso" }}</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      nav a { margin-right: 10px; }
+      table { border-collapse: collapse; }
+      table, th, td { border: 1px solid #333; }
+      .error { color: red; }
+    </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('users') }}">Usuários</a>
+    <a href="{{ url_for('permissions') }}">Permissões</a>
+    <a href="{{ url_for('show_logs') }}">Logs</a>
+    <a href="{{ url_for('analysis') }}">Análise</a>
+    <a href="{{ url_for('monitor') }}">Monitor</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>

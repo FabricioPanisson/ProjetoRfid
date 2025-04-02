@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Logs de Acesso</h2>
+<table>
+  <tr>
+    <th>ID Log</th>
+    <th>Usuário</th>
+    <th>Data/Hora</th>
+    <th>Evento</th>
+    <th>Permitido?</th>
+  </tr>
+  {% for l in logs %}
+  <tr>
+    <td>{{ l[0] }}</td>
+    <td>{{ l[1] if l[1] else 'Desconhecido' }}</td>
+    <td>{{ l[2] }}</td>
+    <td>{{ l[3] }}</td>
+    <td>{{ 'Sim' if l[4] == 1 else 'Não' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

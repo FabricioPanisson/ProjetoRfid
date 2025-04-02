@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gerenciar Permissões</h2>
+<form method="POST" action="{{ url_for('permissions') }}">
+  <label>ID do Usuário:</label><br>
+  <input type="number" name="user_id"><br><br>
+  <label>Permitir acesso?</label>
+  <input type="checkbox" name="can_access"><br><br>
+  <button type="submit">Salvar</button>
+</form>
+<hr>
+<h3>Permissões Cadastradas</h3>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Permissão</th>
+    <th>Toggle</th>
+  </tr>
+  {% for row in data %}
+  <tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ 'Sim' if row[2] == 1 else 'Não' }}</td>
+    <td>
+      <a href="{{ url_for('toggle_permission', uid=row[0]) }}">
+        Alternar
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
